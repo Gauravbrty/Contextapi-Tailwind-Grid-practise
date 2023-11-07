@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.Image_Div{
+  width:200px;
+  height: 200px
+}
+
+.Button_card_Div{
+  position:block ;
+
+}
+
+.Card_Size{
+  width:200px;
+  height:200px
+}
+
+.CardContent_app{
+  display: flex;
+  min-width: fit-content;
+  min-height: 100px;
+}
+
+.Image_Size{
+  height: 100%;
+  width: 100%;
+}

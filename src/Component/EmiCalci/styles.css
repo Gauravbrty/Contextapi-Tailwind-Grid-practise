@@ -1,0 +1,22 @@
+.App {
+    top: 10px;
+    left: 40px;
+    width: 300px;
+    min-height: 300px;
+    height:300px;
+    position: relative;
+  }
+  .MainDiv {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+  }
+  .Slider_View {
+    margin-top: 30px;
+    margin-bottom: 5px;
+  }
+  .h1_text{
+    font-size: 20px;
+  }
