@@ -62,3 +62,8 @@
   height: 100%;
   width: 100%;
 }
+
+.Video_Player_image{
+  cursor:pointer;
+  height:200px
+}

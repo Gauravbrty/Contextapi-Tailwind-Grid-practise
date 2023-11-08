@@ -7,9 +7,9 @@ import Box from '@mui/material/Box';
 import { useContext,useState } from 'react';
 // import ShoppingCard from "./ShoppingCard";
 import ShoppingViewCard from './ShopViewCard';
-// import ProductContext from "./ShoppingCart"
 import CartView from './CartView';
 import CircularProgress from '@mui/material/CircularProgress';
+import {ProductContext} from '../ContextAPI/product-context'
 
 
 function CustomTabPanel(props) {
@@ -46,22 +46,16 @@ function a11yProps(index) {
 
 export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
+  const {products,loading} = React.useContext(ProductContext);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const [cartProducts, setCartProducts] = useState([]);
-  const DeleteData = (id) => {
-   const FilteredData= cartProducts.filter ((item)=> {
-      return (id!== item.id)
-    })
-    setCartProducts(FilteredData);
-  }
  
 
 
   return (
-    props.loading == true? ( 
+    loading == true? ( 
     <Box sx={{ display: 'flex', flexDirection:"column", alignItems:"center" }}>
     <CircularProgress />
   </Box>):
@@ -74,10 +68,10 @@ export default function BasicTabs(props) {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <ShoppingViewCard Data={props.Data} cartProducts={cartProducts} setCartProducts={setCartProducts}/>
+        <ShoppingViewCard />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <CartView Data={props.Data} cartProducts={cartProducts} setCartProducts={setCartProducts} DeleteData={DeleteData}/>
+        <CartView />
       </CustomTabPanel>
     </Box>)
   );

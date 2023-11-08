@@ -19,58 +19,9 @@ const videoGallery  = () => {
     return(
         <>
         <h1 className='text-center mb-10'>Video Gallery</h1>
-    <Box>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><VideoCard/></Item>
-        </Grid>
-      </Grid>
-    </Box>
+ 
+        <VideoCard/>
+   
         </>
     )
 

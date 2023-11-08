@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import "../../App.css"
@@ -14,17 +14,17 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import ShopViewCard from './ShopViewCard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {ProductContext} from '../ContextAPI/product-context'
 
 export default function MediaCard(props) {
-  console.log(props.Data, "data")
-  const [cartProducts, setCartProducts] = useState([]);
-  const handleAddCart = (item) => {
-    setCartProducts((prev) => [...prev, item]);
-  };
+  const {products,cartProducts,setCartProducts,DeleteData} = React.useContext(ProductContext);
+  // const handleAddCart = (item) => {
+  //   setCartProducts((prev) => [...prev, item]);
+  // };
   const initialValue = 0;
   const TotalAmount =
-  props.cartProducts &&
-  props.cartProducts?.reduce(
+  cartProducts &&
+  cartProducts?.reduce(
     (accumulator, currentValue) => accumulator + currentValue.price,
     initialValue
   );
@@ -39,13 +39,13 @@ export default function MediaCard(props) {
   return (
     <div>
         <div>
-        <h1>Total items : {props.cartProducts.length}
+        <h1>Total items : {cartProducts.length}
             </h1>
             <h1>Total Amount : {Math.round(TotalAmount)}
             </h1>
         </div>
         <Grid container>
-      {props.cartProducts && props.cartProducts.map((item, index) => {
+      {cartProducts && cartProducts.map((item, index) => {
         return (
             <Grid xs={3} key = {index}>
           <Box sx={{ flexGrow: 1 }}>
@@ -74,7 +74,7 @@ export default function MediaCard(props) {
                       color="primary"
                       variant="contained"
                       onClick={() => {
-                        props.DeleteData(item.id);
+                        DeleteData(item.id);
                       }}
                     >
                       Remove From Cart

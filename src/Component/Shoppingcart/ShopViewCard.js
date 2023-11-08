@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import "./../../App.css"
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -14,12 +14,14 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import ShopViewCard from './ShopViewCard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {ProductContext} from '../ContextAPI/product-context'
 
 export default function MediaCard(props) {
   console.log(props.Data, "data")
-  const [cartProducts, setCartProducts] = useState([]);
+  // const [cartProducts, setCartProducts] = useState([]);
+const {products,cartProducts,setCartProducts} = React.useContext(ProductContext);
   const handleAddCart = (item) => {
-   props.setCartProducts((prev) => [...prev, item]);
+   setCartProducts((prev) => [...prev, item]);
   };
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -32,10 +34,10 @@ export default function MediaCard(props) {
   return (
     <div>
       <div style={{display: "flex",flexDirection: "row-reverse"}}>
-      < ShoppingCartIcon /> {props.cartProducts.length}
+      < ShoppingCartIcon /> {cartProducts.length}
       </div>
       <Grid container>
-      {props.Data && props.Data.map((item, index) => {
+      {products&& products.map((item, index) => {
      
         return (
           <Grid item  xs={3} key = {index}>

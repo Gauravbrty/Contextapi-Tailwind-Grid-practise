@@ -1,11 +1,10 @@
 import ShoppingcartTabs from './ShoppingCartTabs';
 import { useEffect,useState } from 'react';
 import Axios from 'axios';
-import React, { createContext } from "react";
+import {ProductContext} from '../ContextAPI/product-context';
 
 
 
-const ProductContext = createContext();
 
 const Shopping = () => {
   const [loading,setLoading] =useState(true);
@@ -16,11 +15,18 @@ const Shopping = () => {
           setLoading(false);
         });
       }, []);
+      const [cartProducts, setCartProducts] = useState([]);
+    const DeleteData = (id) => {
+     const FilteredData= cartProducts.filter ((item)=> {
+        return (id!== item.id)
+      })
+      setCartProducts(FilteredData);
+    }
     return(
         <div>
-            {/* <ProductContext.Provider value={{ products }}> */}
-            <ShoppingcartTabs Data={products} loading={loading}/>
-            {/* </ProductContext.Provider> */}
+            <ProductContext.Provider value={{ products,setProducts,loading,cartProducts,setCartProducts,DeleteData}}>
+            <ShoppingcartTabs/>
+            </ProductContext.Provider>
           
         </div>
     )
