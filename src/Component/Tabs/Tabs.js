@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState,useEffect } from 'react';
+import Axios from 'axios'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,6 +10,7 @@ import EmiCal from '../EmiCalci/EmiCalci';
 import ShoppingCart from "../Shoppingcart/ShoppingCart";
 import TableView from '../Table/TableView';
 import VideoGallery from '../VideoGallery/videoGallery';
+import LoginPage from '../Api_login/loginPage';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -35,6 +38,7 @@ CustomTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
+
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -51,6 +55,26 @@ export default function BasicTabs() {
     setValue(newValue);
   };
 
+const[data, settableData] = useState();
+  useEffect(()=>{
+Axios.get("http://localhost:5000/table").then((res)=>
+{settableData(res.data)});
+  },[]);
+
+  const [modalData,setModalData] = useState({
+    col1:"",
+    col2:"",
+    col3:"",
+    col4:"",
+    col5:"",
+  })
+  const handleSubmit = () => {
+Axios.post("http://localhost:5000/table",{...modalData}).then((res)=>{
+  console.log(res);
+  settableData(res.data);
+})
+  }
+
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -60,6 +84,7 @@ export default function BasicTabs() {
           <Tab label="React Table" {...a11yProps(2)} />
           <Tab label="Video Gallery" {...a11yProps(3)} />
           <Tab label="Kanban Board" {...a11yProps(4)} />
+          <Tab label="API" {...a11yProps(5)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -69,7 +94,7 @@ export default function BasicTabs() {
         <ShoppingCart/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <TableView/>
+        <TableView data={data} modalData={modalData} setModalData={setModalData} handleSubmit={handleSubmit}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
       <VideoGallery/>
@@ -78,6 +103,9 @@ export default function BasicTabs() {
       <div>
         Hii this is kanban Board
       </div>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={5}>
+     <LoginPage/>
       </CustomTabPanel>
     </Box>
   );

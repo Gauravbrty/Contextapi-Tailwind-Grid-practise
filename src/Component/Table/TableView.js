@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTable, useSortBy, useFilters, useGlobalFilter ,useAsyncDebounce} from "react-table";
+import Axios from 'axios';
+import DataModal from './Datamodal'
 
 function GlobalFilter({ preGlobalFilteredRows, globalFilter ,setGlobalFilter}) {
   const count = preGlobalFilteredRows.length;
@@ -43,47 +45,48 @@ function DefaultColumnFilter({
   );
 }
 
-function Example() {
-  const data = React.useMemo(
-    () => [
-      {
-        col1: "jaipur",
-        col2: "27",
-        col3: "rain",
-        col4: "739",
-        col5: "90"
-      },
-      {
-        col1: "Vizag",
-        col2: "30",
-        col3: "rain",
-        col4: "740",
-        col5: "87"
-      },
-      {
-        col1: "Lucknow",
-        col2: "23",
-        col3: "rain",
-        col4: "743",
-        col5: "77"
-      },
-      {
-        col1: "Manipur",
-        col2: "34",
-        col3: "sunny",
-        col4: "738",
-        col5: "40"
-      },
-      {
-        col1: "Wayanad",
-        col2: "25",
-        col3: "heavy rain",
-        col4: "739",
-        col5: "88"
-      }
-    ],
-    []
-  );
+function Example({data,modalData,setModalData,handleSubmit}) {
+ 
+  // const data = React.useMemo(
+  //   () => [
+  //     {
+  //       col1: "jaipur",
+  //       col2: "27",
+  //       col3: "rain",
+  //       col4: "739",
+  //       col5: "90"
+  //     },
+  //     {
+  //       col1: "Vizag",
+  //       col2: "30",
+  //       col3: "rain",
+  //       col4: "740",
+  //       col5: "87"
+  //     },
+  //     {
+  //       col1: "Lucknow",
+  //       col2: "23",
+  //       col3: "rain",
+  //       col4: "743",
+  //       col5: "77"
+  //     },
+  //     {
+  //       col1: "Manipur",
+  //       col2: "34",
+  //       col3: "sunny",
+  //       col4: "738",
+  //       col5: "40"
+  //     },
+  //     {
+  //       col1: "Wayanad",
+  //       col2: "25",
+  //       col3: "heavy rain",
+  //       col4: "739",
+  //       col5: "88"
+  //     }
+  //   ],
+  //   []
+  // );
 
   const columns = React.useMemo(
     () => [
@@ -128,7 +131,7 @@ function Example() {
     visibleColumns,
     preGlobalFilteredRows,
     setGlobalFilter
-  } = useTable(
+  } =  useTable(
     {
       columns,
       data,
@@ -141,11 +144,12 @@ function Example() {
 
   return (
     <div>
+<DataModal modalData={modalData} setModalData={setModalData} handleSubmit={handleSubmit}/>
       <table {...getTableProps()} style={{ border: "solid 1px black" }}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
+              {headerGroup.headers?.map((column) => (
                 <th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   style={{
