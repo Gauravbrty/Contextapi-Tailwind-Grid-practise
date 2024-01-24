@@ -28,13 +28,13 @@ const LoginPage = () => {
             [evt.target.name]: value
           });
     }
-    const handleSubmit = () => {
-        return(
-        Axios.post('http://localhost:5000/signup',{...userData}).then((res)=>{
-            console.log("response sent");
-        })
-        )
-    }
+    // const handleSubmit = () => {
+    //     return(
+    //     Axios.post('http://localhost:5000/signup',{...userData}).then((res)=>{
+    //         console.log("response sent");
+    //     })
+    //     )
+    // }
 
     return(
         <div>
@@ -59,7 +59,9 @@ const LoginPage = () => {
         </div>
         </div>
         <div className='CardContent'>
-        <Button variant="contained" onClick={handleSubmit}>SignUp</Button>
+        <Button variant="contained" 
+        // onClick={handleSubmit}
+        >SignUp</Button>
         </div>
       </CardContent>
       <CardActions>

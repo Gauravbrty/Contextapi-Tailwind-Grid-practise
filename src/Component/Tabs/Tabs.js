@@ -55,25 +55,25 @@ export default function BasicTabs() {
     setValue(newValue);
   };
 
-const[data, settableData] = useState();
-  useEffect(()=>{
-Axios.get("http://localhost:5000/table").then((res)=>
-{settableData(res.data)});
-  },[]);
+// const[data, settableData] = useState();
+//   useEffect(()=>{
+// Axios.get("http://localhost:5000/table").then((res)=>
+// {settableData(res.data)});
+//   },[]);
 
-  const [modalData,setModalData] = useState({
-    col1:"",
-    col2:"",
-    col3:"",
-    col4:"",
-    col5:"",
-  })
-  const handleSubmit = () => {
-Axios.post("http://localhost:5000/table",{...modalData}).then((res)=>{
-  console.log(res);
-  settableData(res.data);
-})
-  }
+//   const [modalData,setModalData] = useState({
+//     col1:"",
+//     col2:"",
+//     col3:"",
+//     col4:"",
+//     col5:"",
+//   })
+//   const handleSubmit = () => {
+// Axios.post("http://localhost:5000/table",{...modalData}).then((res)=>{
+//   console.log(res);
+//   settableData(res.data);
+// })
+//   }
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -94,7 +94,8 @@ Axios.post("http://localhost:5000/table",{...modalData}).then((res)=>{
         <ShoppingCart/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <TableView data={data} modalData={modalData} setModalData={setModalData} handleSubmit={handleSubmit}/>
+        {/* <TableView data={data} modalData={modalData} setModalData={setModalData} handleSubmit={handleSubmit}/> */}
+        <h1>Under Development</h1>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
       <VideoGallery/>
