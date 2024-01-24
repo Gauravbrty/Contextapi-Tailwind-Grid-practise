@@ -24,11 +24,17 @@ export default function App() {
   const handleAmount = (event) => {
     setAmount(event.target.value);
   };
-
   useEffect(() => {
-    TotalIntrest(Math.round(amount * (rate * 0.01)/ time));
-    setTotal(Math.round(amount / time + interest));
+    if (time > 0) {
+      const interest = Math.round(amount * (rate * 0.01) / time);
+      TotalIntrest(interest);
+      const total = Math.round(amount / time + interest);
+      setTotal(total);
+    } else {
+      console.error("Time should be greater than zero");
+    }
   }, [rate, time, amount]);
+  
 
   return (
     <div className="App">
